@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Consume.Models.Employee>
+@{
+    ViewBag.Title = "www.compilemode.com";
+}
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <table class="table table-responsive" style="width:auto">
+            <tr>
+                <th>
+                    Emp  Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Project Id
+                </th>
+                <th>
+                    Team Id
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamId)
+            </td>
+        </tr>
+            }
+        </table>
+    </div>
+</div>
