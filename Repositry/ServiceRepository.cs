@@ -20,7 +20,7 @@ namespace Consume.Repositry
         }
         public HttpResponseMessage PutResponse(string url, object model)
         {
-            return Client.PutAsJsonAsync(url, model).Result;
+            return Client.PutAsJsonAsync(url,  model).Result;
         }
         public HttpResponseMessage PostResponse(string url, object model)
         {

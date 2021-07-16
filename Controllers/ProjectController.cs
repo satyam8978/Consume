@@ -45,7 +45,17 @@ namespace Consume.Controllers
         {
             return View();
         }
-
+ 
+        public ActionResult Details(string ProjectID)
+        {
+            ServiceRepository serviceObj = new ServiceRepository();
+            HttpResponseMessage response = serviceObj.GetResponse("api/ProjectDetails/" + ProjectID);
+            response.EnsureSuccessStatusCode();
+            Models.Projects products = response.Content.ReadAsAsync<Models.Projects>().Result;
+            ViewBag.Title = "All Project";
+            return View(products);
+        }
+    
         [HttpPost]
 
         public ActionResult Create(Models.Projects project)
@@ -58,33 +68,47 @@ namespace Consume.Controllers
 
 
         }
-        //[HttpGet]  
+        
         public ActionResult Edit(string ProjectID)
         {
           
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse("api/ProjectDetails/ProjectID?="+ProjectID);
+            HttpResponseMessage response = serviceObj.GetResponse("api/ProjectDetails/"+ProjectID);
             response.EnsureSuccessStatusCode();
             Models.Projects products = response.Content.ReadAsAsync<Models.Projects>().Result;
             ViewBag.Title = "All Project";
             return View(products);
         }
-        //[HttpPost] 
+        //[HttpPut] 
         public ActionResult Update(Models.Projects project)
         {
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.PutResponse("api/ProjectDetails/Update", project);
+            HttpResponseMessage response = serviceObj.PutResponse("api/ProjectDetails/", project);
             response.EnsureSuccessStatusCode();
             return RedirectToAction("Index");
         }
-        [HttpDelete]
-        public ActionResult Delete(string projectid)
+    
+        public ActionResult Delete(string ProjectId)
         {
-            ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.DeleteResponse("api/ProjectDetails/Delete?projectid=" + projectid.ToString());
-            response.EnsureSuccessStatusCode();
-            return RedirectToAction("Index");
+          
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("https://localhost:5001/");
+
+                    //HTTP DELETE
+                    var deleteTask = client.DeleteAsync("api/ProjectDetails/"+ProjectId);
+                    deleteTask.Wait();
+
+                    var result = deleteTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+
+                        return RedirectToAction("Index");
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
         }
     }
 
-}
