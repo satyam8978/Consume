@@ -87,28 +87,34 @@ namespace Consume.Controllers
             response.EnsureSuccessStatusCode();
             return RedirectToAction("Index");
         }
-    
+
         public ActionResult Delete(string ProjectId)
         {
-          
+   
                 using (var client = new HttpClient())
-                {
+            
+               {
                     client.BaseAddress = new Uri("https://localhost:5001/");
 
                     //HTTP DELETE
-                    var deleteTask = client.DeleteAsync("api/ProjectDetails/"+ProjectId);
-                    deleteTask.Wait();
-
-                    var result = deleteTask.Result;
-                    if (result.IsSuccessStatusCode)
+                   
+                 
+                HttpResponseMessage response = client.DeleteAsync("api/ProjectDetails/" + ProjectId).Result;
+               
+                if (response.ToString()== "true")
+                {
+                    ViewBag.Message = "Project Can't delete Employees Working in this team";
+                    return View();
+                }
+                   else
                     {
 
                         return RedirectToAction("Index");
                     }
                 }
 
-                return RedirectToAction("Index");
-            }
+               
+        }
         }
     }
 

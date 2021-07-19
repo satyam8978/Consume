@@ -21,5 +21,20 @@
             <th></th>
         </tr>
     </thead>
-  
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { TeamId = item.TeamId, teamname = item.TeamName, prod = item })
+                @Html.ActionLink("Details", "Details", new { TeamId = item.TeamId }) |
+                @Html.ActionLink("Delete", "Delete", new { TeamId = item.TeamId }) |
+</tr>
+}
+    </tbody>
 </table>
