@@ -49,7 +49,7 @@ namespace Consume.Controllers
             ServiceRepository serviceObj = new ServiceRepository();
             HttpResponseMessage response = serviceObj.GetResponse("api/EmployeeDetails/" + empid);
             response.EnsureSuccessStatusCode();
-            Models.Employee products = response.Content.ReadAsAsync<Models.Employee>().Result;
+            Models.Emp products = response.Content.ReadAsAsync<Models.Emp>().Result;
             ViewBag.Title = "All Project";
             return View(products);
         }
@@ -69,12 +69,13 @@ namespace Consume.Controllers
 
         public ActionResult Edit(string empid)
         {
-
+            int colorIndex=0;
             ServiceRepository serviceObj = new ServiceRepository();
             HttpResponseMessage response = serviceObj.GetResponse("api/EmployeeDetails/" + empid);
             response.EnsureSuccessStatusCode();
-            var products = response.Content.ReadAsAsync<Models.Emp>().Result;
+            Models.Emp products = response.Content.ReadAsAsync<Models.Emp>().Result;
             ViewBag.Title = "All Project";
+            ViewData["Index"] = colorIndex;
             return View(products);
         }
         //[HttpPut] 

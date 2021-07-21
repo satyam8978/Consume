@@ -18,13 +18,14 @@ namespace Consume.Models
             public string EMPName { get; set; }
             public string EmailId { get; set; }
             public string MobileNo { get; set; }
-            public List<string> ProjectID { get; set; }
+        public List<string> ProjectID { get; set; }
 
-            public List<string> TeamId { get; set; }
+        public List<string> TeamId { get; set; }
 
 
 
-        
+
+
     }
     public class Emp : Employee
     {

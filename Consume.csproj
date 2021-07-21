@@ -7,7 +7,6 @@
   <ItemGroup>
     <None Include="Views\Employee\Create.cshtml" />
     <None Include="Views\Employee\Details.cshtml" />
-    <None Include="Views\Employee\Edit.cshtml" />
     <None Include="Views\Employee\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
